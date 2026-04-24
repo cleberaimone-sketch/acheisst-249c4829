@@ -14,16 +14,142 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      professional_specialties: {
+        Row: {
+          created_at: string
+          id: string
+          profile_id: string
+          specialty: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          profile_id: string
+          specialty: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          profile_id?: string
+          specialty?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "professional_specialties_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          about: string | null
+          account_type: Database["public"]["Enums"]["account_type"]
+          avatar_url: string | null
+          city: string | null
+          created_at: string
+          display_name: string | null
+          document: string | null
+          id: string
+          is_verified: boolean
+          legal_name: string | null
+          likes_count: number
+          phone: string | null
+          plan: Database["public"]["Enums"]["subscription_plan"]
+          public_email: string | null
+          state: string | null
+          updated_at: string
+          user_id: string
+          views_count: number
+          website: string | null
+          whatsapp: string | null
+        }
+        Insert: {
+          about?: string | null
+          account_type?: Database["public"]["Enums"]["account_type"]
+          avatar_url?: string | null
+          city?: string | null
+          created_at?: string
+          display_name?: string | null
+          document?: string | null
+          id?: string
+          is_verified?: boolean
+          legal_name?: string | null
+          likes_count?: number
+          phone?: string | null
+          plan?: Database["public"]["Enums"]["subscription_plan"]
+          public_email?: string | null
+          state?: string | null
+          updated_at?: string
+          user_id: string
+          views_count?: number
+          website?: string | null
+          whatsapp?: string | null
+        }
+        Update: {
+          about?: string | null
+          account_type?: Database["public"]["Enums"]["account_type"]
+          avatar_url?: string | null
+          city?: string | null
+          created_at?: string
+          display_name?: string | null
+          document?: string | null
+          id?: string
+          is_verified?: boolean
+          legal_name?: string | null
+          likes_count?: number
+          phone?: string | null
+          plan?: Database["public"]["Enums"]["subscription_plan"]
+          public_email?: string | null
+          state?: string | null
+          updated_at?: string
+          user_id?: string
+          views_count?: number
+          website?: string | null
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      account_type: "profissional" | "clinica" | "empresa_sst" | "empresa_epi"
+      app_role: "admin" | "moderator" | "user"
+      subscription_plan: "free" | "premium" | "pro"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +276,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      account_type: ["profissional", "clinica", "empresa_sst", "empresa_epi"],
+      app_role: ["admin", "moderator", "user"],
+      subscription_plan: ["free", "premium", "pro"],
+    },
   },
 } as const

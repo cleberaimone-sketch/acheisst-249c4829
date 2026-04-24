@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X, Search, UserCircle2 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 import logoText from "@/assets/acheisst-logo-text.png";
 
 const navItems = [
@@ -13,6 +14,7 @@ const navItems = [
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user } = useAuth();
 
   return (
     <header className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur border-b border-border">
@@ -41,12 +43,29 @@ const Header = () => {
           >
             <Search className="w-4 h-4" />
           </Link>
-          <Link
-            to="/#planos"
-            className="hidden md:inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary/90 transition-all"
-          >
-            Cadastre-se
-          </Link>
+          {user ? (
+            <Link
+              to="/conta"
+              className="hidden md:inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary/90 transition-all"
+            >
+              <UserCircle2 className="w-4 h-4" /> Minha conta
+            </Link>
+          ) : (
+            <>
+              <Link
+                to="/auth"
+                className="hidden md:inline-flex items-center text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+              >
+                Entrar
+              </Link>
+              <Link
+                to="/auth"
+                className="hidden md:inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary/90 transition-all"
+              >
+                Cadastre-se
+              </Link>
+            </>
+          )}
           <button
             className="md:hidden p-2 text-foreground"
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -70,11 +89,11 @@ const Header = () => {
             </Link>
           ))}
           <Link
-            to="/#planos"
+            to={user ? "/conta" : "/auth"}
             className="mt-4 inline-flex items-center justify-center bg-primary text-primary-foreground px-5 py-3 rounded-full text-sm font-semibold"
             onClick={() => setMobileOpen(false)}
           >
-            Cadastre-se
+            {user ? "Minha conta" : "Cadastre-se"}
           </Link>
         </nav>
       )}
