@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
 import { Search, ShieldCheck, MapPin } from "lucide-react";
-import logoIcon from "@/assets/acheisst-logo-icon.png";
 
 const HeroSection = () => (
   <section className="relative bg-gradient-hero overflow-hidden">
@@ -15,7 +13,7 @@ const HeroSection = () => (
     />
 
     <div className="relative px-6 md:px-10 pt-32 md:pt-40 pb-16 md:pb-24 max-w-7xl mx-auto">
-      <div className="grid md:grid-cols-[1.3fr_1fr] gap-10 md:gap-16 items-center">
+      <div className="max-w-4xl mx-auto text-center">
         <div>
           <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-3 py-1.5 rounded-full text-xs font-semibold mb-6">
             <ShieldCheck className="w-3.5 h-3.5" />
