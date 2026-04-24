@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import {
+  UserRoundCog,
+  HeartPulse,
+  ShieldHalf,
   HardHat,
-  Stethoscope,
-  Building2,
-  ShieldCheck,
   GraduationCap,
   Briefcase,
   Calendar,
@@ -12,10 +12,10 @@ import {
 } from "lucide-react";
 
 const categories = [
-  { label: "Profissionais", icon: HardHat, description: "Técnicos e engenheiros de segurança" },
-  { label: "Clínicas", icon: Stethoscope, description: "Medicina e exames ocupacionais" },
-  { label: "Empresas SST", icon: Building2, description: "Consultorias e laudos especializados" },
-  { label: "Empresas EPI", icon: ShieldCheck, description: "Equipamentos de proteção individual" },
+  { label: "Profissionais", icon: UserRoundCog, description: "Técnicos e engenheiros de segurança" },
+  { label: "Clínicas", icon: HeartPulse, description: "Medicina e exames ocupacionais" },
+  { label: "Empresas SST", icon: ShieldHalf, description: "Consultorias e laudos especializados" },
+  { label: "Empresas EPI", icon: HardHat, description: "Equipamentos de proteção individual" },
   { label: "Cursos", icon: GraduationCap, description: "Capacitação e treinamentos NR" },
   { label: "Vagas", icon: Briefcase, description: "Oportunidades para profissionais SST" },
   { label: "Eventos", icon: Calendar, description: "Congressos, feiras e webinars" },
