@@ -26,13 +26,13 @@ const HeroSection = () => (
             do <span className="text-secondary">Brasil</span>
           </h1>
 
-          <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
+          <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
             Encontre técnicos, engenheiros, médicos do trabalho, clínicas, empresas de SST e fornecedores de EPI credenciados — tudo em um só lugar.
           </p>
 
           {/* Search bar */}
           <form
-            className="mt-8 flex items-center bg-background border border-border rounded-full shadow-card pl-5 pr-2 py-2 max-w-xl focus-within:border-primary focus-within:shadow-card-hover transition-all"
+            className="mt-8 mx-auto flex items-center bg-background border border-border rounded-full shadow-card pl-5 pr-2 py-2 max-w-xl focus-within:border-primary focus-within:shadow-card-hover transition-all"
             onSubmit={(e) => {
               e.preventDefault();
               document.getElementById("categorias")?.scrollIntoView({ behavior: "smooth" });
@@ -52,7 +52,7 @@ const HeroSection = () => (
             </button>
           </form>
 
-          <div className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
+          <div className="mt-6 flex items-center justify-center gap-2 text-xs text-muted-foreground">
             <MapPin className="w-3.5 h-3.5" />
             Cobertura nacional · Profissionais verificados
           </div>
