@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Ray Phoenix palette: --bg-color:#F5F4EC --text-color:#442D15 --main-color:#AB7E27 --light-grey:#e9e6d5 */
+    --background: 50 24% 94%;
+    --foreground: 27 53% 17%;
+
+    --card: 50 24% 94%;
+    --card-foreground: 27 53% 17%;
+
+    --popover: 50 24% 94%;
+    --popover-foreground: 27 53% 17%;
+
+    --primary: 27 53% 17%;
+    --primary-foreground: 50 24% 94%;
+
+    --secondary: 27 53% 17%;
+    --secondary-foreground: 50 24% 94%;
+
+    --muted: 45 18% 87%;
+    --muted-foreground: 27 35% 35%;
+
+    --accent: 40 63% 41%;
+    --accent-foreground: 50 24% 94%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 50 24% 94%;
+
+    --border: 40 15% 78%;
+    --input: 40 15% 78%;
+    --ring: 27 53% 17%;
+
+    --radius: 0rem;
+
+    --sidebar-background: 50 24% 94%;
+    --sidebar-foreground: 27 53% 17%;
+    --sidebar-primary: 27 53% 17%;
+    --sidebar-primary-foreground: 50 24% 94%;
+    --sidebar-accent: 45 18% 87%;
+    --sidebar-accent-foreground: 27 53% 17%;
+    --sidebar-border: 40 15% 78%;
+    --sidebar-ring: 27 53% 17%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
