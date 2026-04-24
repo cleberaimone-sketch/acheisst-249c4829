@@ -57,19 +57,12 @@ const HeroSection = () => (
             Cobertura nacional · Profissionais verificados
           </div>
         </div>
-
-        {/* Right: logo icon as visual hero */}
-        <div className="flex justify-center md:justify-end">
-          <div className="relative">
-            <div className="absolute inset-0 bg-secondary/15 blur-3xl rounded-full" aria-hidden />
-            <img
-              src={logoIcon}
-              alt="AcheiSST — rede de profissionais de SST do Brasil"
-              className="relative w-64 sm:w-80 md:w-[26rem] h-auto"
-            />
-          </div>
-        </div>
       </div>
+    </div>
+  </section>
+);
+
+export default HeroSection;
     </div>
   </section>
 );
