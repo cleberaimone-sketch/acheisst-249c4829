@@ -1,75 +1,80 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, ArrowRight } from "lucide-react";
-import MarqueeTicker from "@/components/MarqueeTicker";
+import { Menu, X, Search } from "lucide-react";
+import logoText from "@/assets/acheisst-logo-text.png";
 
 const navItems = [
-  { label: "Sessions", to: "/sessions" },
-  { label: "Speakers", to: "/speakers" },
+  { label: "Profissionais", to: "/#categorias" },
+  { label: "Clínicas", to: "/#categorias" },
+  { label: "Empresas SST", to: "/#categorias" },
+  { label: "Planos", to: "/#planos" },
+  { label: "Novidades", to: "/#novidades" },
 ];
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 w-full z-50">
-      {/* Marquee ticker */}
-      <MarqueeTicker />
+    <header className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur border-b border-border">
+      <div className="px-6 md:px-10 h-16 md:h-20 flex items-center justify-between gap-6">
+        <Link to="/" className="flex items-center" aria-label="AcheiSST">
+          <img src={logoText} alt="AcheiSST" className="h-7 md:h-9 w-auto" />
+        </Link>
 
-      {/* Top tier: logo + CTA */}
-      <div className="bg-background border-b border-border">
-        <div className="px-6 md:px-8 py-4 flex items-center justify-between">
-          <Link to="/" className="text-foreground text-xl font-medium tracking-tight">
-            Craft Summit <span className="text-muted-foreground">25</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <a
-              href="/#tickets"
-              className="hidden md:inline-flex items-center gap-2 border border-foreground text-foreground px-5 py-2 text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-foreground hover:text-background transition-all"
-            >
-              Get your ticket <ArrowRight className="w-3 h-3" />
-            </a>
-            <button className="md:hidden p-2 text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom tier: full-width sub-nav */}
-      <nav className="hidden md:flex bg-background border-b border-border">
-        {navItems.map((item, i) => (
-          <Link
-            key={item.label}
-            to={item.to}
-            className={`flex-1 text-center py-3 text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors ${
-              i < navItems.length - 1 ? "border-r border-border" : ""
-            }`}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </nav>
-
-      {/* Mobile nav */}
-      {mobileOpen && (
-        <nav className="md:hidden bg-background border-b border-border px-4 py-4 flex flex-col">
+        <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <Link
               key={item.label}
               to={item.to}
-              className="py-3 border-b border-border last:border-b-0 text-[11px] font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <Link
+            to="/#categorias"
+            aria-label="Buscar"
+            className="hidden md:inline-flex items-center justify-center h-10 w-10 rounded-full border border-border text-foreground hover:bg-muted transition-colors"
+          >
+            <Search className="w-4 h-4" />
+          </Link>
+          <Link
+            to="/#planos"
+            className="hidden md:inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary/90 transition-all"
+          >
+            Cadastre-se
+          </Link>
+          <button
+            className="md:hidden p-2 text-foreground"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Menu"
+          >
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+      </div>
+
+      {mobileOpen && (
+        <nav className="md:hidden bg-background border-t border-border px-6 py-4 flex flex-col">
+          {navItems.map((item) => (
+            <Link
+              key={item.label}
+              to={item.to}
+              className="py-3 border-b border-border last:border-b-0 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
               onClick={() => setMobileOpen(false)}
             >
               {item.label}
             </Link>
           ))}
           <Link
-            to="/sessions"
-            className="mt-4 inline-flex items-center justify-center gap-2 border border-foreground text-foreground px-5 py-2.5 text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-foreground hover:text-background transition-all"
+            to="/#planos"
+            className="mt-4 inline-flex items-center justify-center bg-primary text-primary-foreground px-5 py-3 rounded-full text-sm font-semibold"
             onClick={() => setMobileOpen(false)}
           >
-            Get your ticket <ArrowRight className="w-3 h-3" />
+            Cadastre-se
           </Link>
         </nav>
       )}

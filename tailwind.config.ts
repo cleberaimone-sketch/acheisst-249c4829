@@ -14,8 +14,17 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"Libre Franklin"', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Inter', '"Libre Franklin"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['"DM Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+      },
+      backgroundImage: {
+        'gradient-brand': 'var(--gradient-brand)',
+        'gradient-hero': 'var(--gradient-hero)',
+      },
+      boxShadow: {
+        'card': 'var(--shadow-card)',
+        'card-hover': 'var(--shadow-card-hover)',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -63,9 +72,9 @@ export default {
         },
       },
       borderRadius: {
-        lg: "0px",
-        md: "0px",
-        sm: "0px",
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 4px)",
+        sm: "calc(var(--radius) - 8px)",
       },
       keyframes: {
         "accordion-down": {

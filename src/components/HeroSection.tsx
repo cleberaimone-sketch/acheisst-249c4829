@@ -1,44 +1,77 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import heroKeynote from "@/assets/hero-keynote.jpg";
+import { Search, ShieldCheck, MapPin } from "lucide-react";
+import logoIcon from "@/assets/acheisst-logo-icon.png";
 
 const HeroSection = () => (
-  <section className="bg-background text-foreground">
-    {/* Headline area */}
-    <div className="px-6 md:px-8 pt-40 md:pt-52 pb-16 md:pb-24">
-      <h1 className="text-5xl sm:text-7xl md:text-[6rem] font-medium leading-[0.95] tracking-[-0.04em] max-w-[90%] md:max-w-[70%]">
-        The product conference for builders
-      </h1>
+  <section className="relative bg-gradient-hero overflow-hidden">
+    {/* Subtle dotted backdrop */}
+    <div
+      className="absolute inset-0 opacity-[0.04] pointer-events-none"
+      style={{
+        backgroundImage: "radial-gradient(hsl(var(--primary)) 1px, transparent 1px)",
+        backgroundSize: "24px 24px",
+      }}
+      aria-hidden
+    />
 
-      <div className="mt-8 md:mt-12 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+    <div className="relative px-6 md:px-10 pt-32 md:pt-40 pb-16 md:pb-24 max-w-7xl mx-auto">
+      <div className="grid md:grid-cols-[1.3fr_1fr] gap-10 md:gap-16 items-center">
         <div>
-          <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-muted-foreground mb-6">
-            June 12, 2025 · San Francisco, CA
+          <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-3 py-1.5 rounded-full text-xs font-semibold mb-6">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            Plataforma 100% dedicada à SST
+          </div>
+
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight text-foreground">
+            A primeira plataforma que reúne{" "}
+            <span className="text-primary">profissionais de SST</span>{" "}
+            do <span className="text-secondary">Brasil</span>
+          </h1>
+
+          <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
+            Encontre técnicos, engenheiros, médicos do trabalho, clínicas, empresas de SST e fornecedores de EPI credenciados — tudo em um só lugar.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <a href="#tickets" className="border border-foreground text-foreground px-7 py-3 text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-foreground hover:text-background transition-all inline-flex items-center gap-2">
-              Get your ticket <ArrowRight className="w-3.5 h-3.5" />
-            </a>
-            <Link to="/speakers" className="border border-border text-foreground px-7 py-3 text-[10px] font-mono uppercase tracking-[0.2em] hover:bg-foreground hover:text-background transition-all inline-flex items-center gap-2">
-              View speakers <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+
+          {/* Search bar */}
+          <form
+            className="mt-8 flex items-center bg-background border border-border rounded-full shadow-card pl-5 pr-2 py-2 max-w-xl focus-within:border-primary focus-within:shadow-card-hover transition-all"
+            onSubmit={(e) => {
+              e.preventDefault();
+              document.getElementById("categorias")?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            <Search className="w-5 h-5 text-muted-foreground shrink-0" />
+            <input
+              type="text"
+              placeholder="Busque por PGR, LTCAT, médico do trabalho..."
+              className="flex-1 bg-transparent outline-none px-3 py-2 text-sm md:text-base placeholder:text-muted-foreground"
+            />
+            <button
+              type="submit"
+              className="bg-primary text-primary-foreground rounded-full px-5 md:px-6 py-2.5 text-sm font-semibold hover:bg-primary/90 transition-all"
+            >
+              Buscar
+            </button>
+          </form>
+
+          <div className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
+            <MapPin className="w-3.5 h-3.5" />
+            Cobertura nacional · Profissionais verificados
           </div>
         </div>
 
-        <p className="text-3xl md:text-5xl font-medium text-foreground tracking-tight text-right hidden md:block leading-[1.1]">
-          Where product&nbsp;leaders&nbsp;gather.
-        </p>
+        {/* Right: logo icon as visual hero */}
+        <div className="flex justify-center md:justify-end">
+          <div className="relative">
+            <div className="absolute inset-0 bg-secondary/15 blur-3xl rounded-full" aria-hidden />
+            <img
+              src={logoIcon}
+              alt="AcheiSST — rede de profissionais de SST do Brasil"
+              className="relative w-64 sm:w-80 md:w-[26rem] h-auto"
+            />
+          </div>
+        </div>
       </div>
-    </div>
-
-    {/* Full-bleed hero image */}
-    <div className="w-full">
-      <img
-        src={heroKeynote}
-        alt="Craft Summit 2025 conference"
-        className="w-full h-[40vh] md:h-[56vh] object-cover"
-        loading="eager"
-      />
     </div>
   </section>
 );
