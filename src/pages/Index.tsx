@@ -1,11 +1,9 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
-import SessionsSection from "@/components/SessionsSection";
-import EventRecapSection from "@/components/EventRecapSection";
-import SponsorsSection from "@/components/SponsorsSection";
-import TicketsSection from "@/components/TicketsSection";
-import AccentBar from "@/components/AccentBar";
+import CategoriesSection from "@/components/CategoriesSection";
+import PlansSection from "@/components/PlansSection";
+import NewsSection from "@/components/NewsSection";
 import { FadeInSection } from "@/components/FadeInSection";
 
 const Index = () => (
@@ -13,21 +11,14 @@ const Index = () => (
     <Header />
     <main>
       <HeroSection />
-      <AccentBar />
       <FadeInSection>
-        <TicketsSection />
+        <CategoriesSection />
       </FadeInSection>
-      <AccentBar />
       <FadeInSection>
-        <SessionsSection />
+        <PlansSection />
       </FadeInSection>
-      <AccentBar />
       <FadeInSection>
-        <EventRecapSection />
-      </FadeInSection>
-      <AccentBar />
-      <FadeInSection>
-        <SponsorsSection />
+        <NewsSection />
       </FadeInSection>
     </main>
     <Footer />
