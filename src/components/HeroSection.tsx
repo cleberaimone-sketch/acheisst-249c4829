@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
 import { Search, ShieldCheck, MapPin } from "lucide-react";
-import logoIcon from "@/assets/acheisst-logo-icon.png";
 
 const HeroSection = () => (
   <section className="relative bg-gradient-hero overflow-hidden">
@@ -15,7 +13,7 @@ const HeroSection = () => (
     />
 
     <div className="relative px-6 md:px-10 pt-32 md:pt-40 pb-16 md:pb-24 max-w-7xl mx-auto">
-      <div className="grid md:grid-cols-[1.3fr_1fr] gap-10 md:gap-16 items-center">
+      <div className="max-w-4xl mx-auto text-center">
         <div>
           <div className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-3 py-1.5 rounded-full text-xs font-semibold mb-6">
             <ShieldCheck className="w-3.5 h-3.5" />
@@ -57,18 +55,6 @@ const HeroSection = () => (
           <div className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
             <MapPin className="w-3.5 h-3.5" />
             Cobertura nacional · Profissionais verificados
-          </div>
-        </div>
-
-        {/* Right: logo icon as visual hero */}
-        <div className="flex justify-center md:justify-end">
-          <div className="relative">
-            <div className="absolute inset-0 bg-secondary/15 blur-3xl rounded-full" aria-hidden />
-            <img
-              src={logoIcon}
-              alt="AcheiSST — rede de profissionais de SST do Brasil"
-              className="relative w-64 sm:w-80 md:w-[26rem] h-auto"
-            />
           </div>
         </div>
       </div>
