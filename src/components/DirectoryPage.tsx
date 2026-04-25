@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Search, MapPin } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -21,9 +22,10 @@ const BR_STATES = [
 ];
 
 const DirectoryPage = ({ accountType, title, subtitle, eyebrow }: DirectoryPageProps) => {
+  const [searchParams] = useSearchParams();
   const [profiles, setProfiles] = useState<ProviderCardData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(searchParams.get("q") ?? "");
   const [stateFilter, setStateFilter] = useState<string>("");
 
   useEffect(() => {
