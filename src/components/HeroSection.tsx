@@ -1,6 +1,11 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Search, ShieldCheck, MapPin } from "lucide-react";
 
-const HeroSection = () => (
+const HeroSection = () => {
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+  return (
   <section className="relative bg-gradient-hero overflow-hidden">
     {/* Subtle dotted backdrop */}
     <div
@@ -35,12 +40,15 @@ const HeroSection = () => (
             className="mt-8 mx-auto flex items-center bg-background border border-border rounded-full shadow-card pl-5 pr-2 py-2 max-w-xl focus-within:border-primary focus-within:shadow-card-hover transition-all"
             onSubmit={(e) => {
               e.preventDefault();
-              document.getElementById("categorias")?.scrollIntoView({ behavior: "smooth" });
+              const q = query.trim();
+              navigate(q ? `/profissionais?q=${encodeURIComponent(q)}` : "/profissionais");
             }}
           >
             <Search className="w-5 h-5 text-muted-foreground shrink-0" />
             <input
               type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
               placeholder="Busque por PGR, LTCAT, médico do trabalho..."
               className="flex-1 bg-transparent outline-none px-3 py-2 text-sm md:text-base placeholder:text-muted-foreground"
             />
@@ -60,6 +68,7 @@ const HeroSection = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default HeroSection;
