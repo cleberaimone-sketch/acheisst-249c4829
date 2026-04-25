@@ -11,11 +11,11 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-const categories = [
-  { label: "Profissionais", icon: UserRoundCog, description: "Técnicos e engenheiros de segurança" },
-  { label: "Clínicas", icon: HeartPulse, description: "Medicina e exames ocupacionais" },
-  { label: "Empresas SST", icon: ShieldHalf, description: "Consultorias e laudos especializados" },
-  { label: "Empresas EPI", icon: HardHat, description: "Equipamentos de proteção individual" },
+const categories: { label: string; icon: typeof UserRoundCog; description: string; to?: string }[] = [
+  { label: "Profissionais", icon: UserRoundCog, description: "Técnicos e engenheiros de segurança", to: "/profissionais" },
+  { label: "Clínicas", icon: HeartPulse, description: "Medicina e exames ocupacionais", to: "/clinicas" },
+  { label: "Empresas SST", icon: ShieldHalf, description: "Consultorias e laudos especializados", to: "/empresas-sst" },
+  { label: "Empresas EPI", icon: HardHat, description: "Equipamentos de proteção individual", to: "/empresas-epi" },
   { label: "Cursos", icon: GraduationCap, description: "Capacitação e treinamentos NR" },
   { label: "Vagas", icon: Briefcase, description: "Oportunidades para profissionais SST" },
   { label: "Eventos", icon: Calendar, description: "Congressos, feiras e webinars" },
@@ -43,19 +43,33 @@ const CategoriesSection = () => (
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
-        {categories.map(({ label, icon: Icon, description }) => (
-          <button
-            key={label}
-            className="group text-left bg-background border border-border rounded-xl p-5 md:p-6 shadow-card hover:shadow-card-hover hover:border-primary/40 hover:-translate-y-0.5 transition-all"
-            onClick={() => document.getElementById("planos")?.scrollIntoView({ behavior: "smooth" })}
-          >
-            <div className="w-11 h-11 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-              <Icon className="w-5 h-5" />
-            </div>
-            <h3 className="font-semibold text-foreground text-base mb-1">{label}</h3>
-            <p className="text-xs text-muted-foreground leading-relaxed">{description}</p>
-          </button>
-        ))}
+        {categories.map(({ label, icon: Icon, description, to }) => {
+          const inner = (
+            <>
+              <div className="w-11 h-11 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                <Icon className="w-5 h-5" />
+              </div>
+              <h3 className="font-semibold text-foreground text-base mb-1">{label}</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">{description}</p>
+            </>
+          );
+          const className =
+            "group text-left bg-background border border-border rounded-xl p-5 md:p-6 shadow-card hover:shadow-card-hover hover:border-primary/40 hover:-translate-y-0.5 transition-all block";
+          return to ? (
+            <Link key={label} to={to} className={className}>
+              {inner}
+            </Link>
+          ) : (
+            <button
+              key={label}
+              type="button"
+              className={className}
+              onClick={() => document.getElementById("planos")?.scrollIntoView({ behavior: "smooth" })}
+            >
+              {inner}
+            </button>
+          );
+        })}
       </div>
     </div>
   </section>
