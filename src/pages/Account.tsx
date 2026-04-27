@@ -38,6 +38,8 @@ const Account = () => {
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [profileId, setProfileId] = useState<string | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [profile, setProfile] = useState({
     display_name: "",
     legal_name: "",
@@ -69,6 +71,8 @@ const Account = () => {
       if (error) {
         toast.error("Erro ao carregar perfil");
       } else if (data) {
+        setProfileId(data.id);
+        setAvatarUrl(data.avatar_url ?? null);
         setProfile({
           display_name: data.display_name ?? "",
           legal_name: data.legal_name ?? "",
