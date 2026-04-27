@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ArrowLeft, BadgeCheck, MapPin, Globe, Mail, Phone, MessageCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -49,6 +50,36 @@ const ProviderProfile = () => {
     .slice(0, 2)
     .join("")
     .toUpperCase();
+
+  const seo = useMemo(() => {
+    if (!profile) return null;
+    const name = profile.display_name ?? "Prestador SST";
+    const role = ACCOUNT_LABEL[profile.account_type] ?? "Prestador";
+    const loc = [profile.city, profile.state].filter(Boolean).join(" / ");
+    const title = `${name} — ${role}${loc ? ` em ${loc}` : ""} | AcheiSST`;
+    const desc = (profile.about ?? `${role} cadastrado no AcheiSST${loc ? ` em ${loc}` : ""}.`).slice(0, 158);
+    const url = typeof window !== "undefined" ? window.location.href : "";
+    const isOrg = profile.account_type !== "profissional";
+    const jsonLd: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": isOrg ? "LocalBusiness" : "Person",
+      name,
+      description: profile.about ?? undefined,
+      url,
+      image: profile.avatar_url ?? undefined,
+      telephone: profile.phone ?? profile.whatsapp ?? undefined,
+      email: profile.public_email ?? undefined,
+      address: loc
+        ? {
+            "@type": "PostalAddress",
+            addressLocality: profile.city ?? undefined,
+            addressRegion: profile.state ?? undefined,
+            addressCountry: "BR",
+          }
+        : undefined,
+    };
+    return { title, desc, url, jsonLd };
+  }, [profile]);
 
   return (
     <div className="min-h-screen bg-background">
