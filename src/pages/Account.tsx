@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import { Loader2, LogOut, ShieldCheck, BadgeCheck } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AvatarUpload from "@/components/AvatarUpload";
+import SpecialtiesEditor from "@/components/SpecialtiesEditor";
 
 type AccountType = "profissional" | "clinica" | "empresa_sst" | "empresa_epi";
 
