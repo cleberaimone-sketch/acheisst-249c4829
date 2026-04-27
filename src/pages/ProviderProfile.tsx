@@ -83,6 +83,20 @@ const ProviderProfile = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {seo && (
+        <Helmet>
+          <title>{seo.title}</title>
+          <meta name="description" content={seo.desc} />
+          <link rel="canonical" href={seo.url} />
+          <meta property="og:title" content={seo.title} />
+          <meta property="og:description" content={seo.desc} />
+          <meta property="og:type" content="profile" />
+          <meta property="og:url" content={seo.url} />
+          {profile?.avatar_url && <meta property="og:image" content={profile.avatar_url} />}
+          <meta name="twitter:card" content="summary_large_image" />
+          <script type="application/ld+json">{JSON.stringify(seo.jsonLd)}</script>
+        </Helmet>
+      )}
       <Header />
       <main className="pt-32 md:pt-40 pb-20">
         <div className="px-6 md:px-10 max-w-4xl mx-auto">
