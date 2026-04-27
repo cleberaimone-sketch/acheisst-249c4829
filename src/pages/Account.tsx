@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import { Loader2, LogOut, ShieldCheck, BadgeCheck } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AvatarUpload from "@/components/AvatarUpload";
+import SpecialtiesEditor from "@/components/SpecialtiesEditor";
 
 type AccountType = "profissional" | "clinica" | "empresa_sst" | "empresa_epi";
 
@@ -36,6 +38,8 @@ const Account = () => {
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [profileId, setProfileId] = useState<string | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [profile, setProfile] = useState({
     display_name: "",
     legal_name: "",
@@ -67,6 +71,8 @@ const Account = () => {
       if (error) {
         toast.error("Erro ao carregar perfil");
       } else if (data) {
+        setProfileId(data.id);
+        setAvatarUrl(data.avatar_url ?? null);
         setProfile({
           display_name: data.display_name ?? "",
           legal_name: data.legal_name ?? "",
@@ -175,6 +181,19 @@ const Account = () => {
             </button>
           </div>
 
+          {/* Avatar */}
+          {user && (
+            <div className="bg-background border border-border rounded-2xl p-6 md:p-8 shadow-card mb-6">
+              <h2 className="font-display text-lg font-bold text-foreground mb-4">Foto de perfil</h2>
+              <AvatarUpload
+                userId={user.id}
+                currentUrl={avatarUrl}
+                displayName={profile.display_name}
+                onChange={setAvatarUrl}
+              />
+            </div>
+          )}
+
           {/* Form */}
           <form onSubmit={handleSave} className="bg-background border border-border rounded-2xl p-6 md:p-8 shadow-card space-y-5">
             <h2 className="font-display text-lg font-bold text-foreground">Dados do prestador</h2>
@@ -236,6 +255,13 @@ const Account = () => {
               Salvar alterações
             </button>
           </form>
+
+          {/* Specialties */}
+          {profileId && (
+            <div className="mt-6">
+              <SpecialtiesEditor profileId={profileId} />
+            </div>
+          )}
         </div>
       </main>
       <Footer />

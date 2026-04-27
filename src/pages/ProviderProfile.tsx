@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ArrowLeft, BadgeCheck, MapPin, Globe, Mail, Phone, MessageCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -50,8 +51,52 @@ const ProviderProfile = () => {
     .join("")
     .toUpperCase();
 
+  const seo = useMemo(() => {
+    if (!profile) return null;
+    const name = profile.display_name ?? "Prestador SST";
+    const role = ACCOUNT_LABEL[profile.account_type] ?? "Prestador";
+    const loc = [profile.city, profile.state].filter(Boolean).join(" / ");
+    const title = `${name} — ${role}${loc ? ` em ${loc}` : ""} | AcheiSST`;
+    const desc = (profile.about ?? `${role} cadastrado no AcheiSST${loc ? ` em ${loc}` : ""}.`).slice(0, 158);
+    const url = typeof window !== "undefined" ? window.location.href : "";
+    const isOrg = profile.account_type !== "profissional";
+    const jsonLd: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": isOrg ? "LocalBusiness" : "Person",
+      name,
+      description: profile.about ?? undefined,
+      url,
+      image: profile.avatar_url ?? undefined,
+      telephone: profile.phone ?? profile.whatsapp ?? undefined,
+      email: profile.public_email ?? undefined,
+      address: loc
+        ? {
+            "@type": "PostalAddress",
+            addressLocality: profile.city ?? undefined,
+            addressRegion: profile.state ?? undefined,
+            addressCountry: "BR",
+          }
+        : undefined,
+    };
+    return { title, desc, url, jsonLd };
+  }, [profile]);
+
   return (
     <div className="min-h-screen bg-background">
+      {seo && (
+        <Helmet>
+          <title>{seo.title}</title>
+          <meta name="description" content={seo.desc} />
+          <link rel="canonical" href={seo.url} />
+          <meta property="og:title" content={seo.title} />
+          <meta property="og:description" content={seo.desc} />
+          <meta property="og:type" content="profile" />
+          <meta property="og:url" content={seo.url} />
+          {profile?.avatar_url && <meta property="og:image" content={profile.avatar_url} />}
+          <meta name="twitter:card" content="summary_large_image" />
+          <script type="application/ld+json">{JSON.stringify(seo.jsonLd)}</script>
+        </Helmet>
+      )}
       <Header />
       <main className="pt-32 md:pt-40 pb-20">
         <div className="px-6 md:px-10 max-w-4xl mx-auto">
