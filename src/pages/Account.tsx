@@ -181,6 +181,19 @@ const Account = () => {
             </button>
           </div>
 
+          {/* Avatar */}
+          {user && (
+            <div className="bg-background border border-border rounded-2xl p-6 md:p-8 shadow-card mb-6">
+              <h2 className="font-display text-lg font-bold text-foreground mb-4">Foto de perfil</h2>
+              <AvatarUpload
+                userId={user.id}
+                currentUrl={avatarUrl}
+                displayName={profile.display_name}
+                onChange={setAvatarUrl}
+              />
+            </div>
+          )}
+
           {/* Form */}
           <form onSubmit={handleSave} className="bg-background border border-border rounded-2xl p-6 md:p-8 shadow-card space-y-5">
             <h2 className="font-display text-lg font-bold text-foreground">Dados do prestador</h2>
@@ -242,6 +255,13 @@ const Account = () => {
               Salvar alterações
             </button>
           </form>
+
+          {/* Specialties */}
+          {profileId && (
+            <div className="mt-6">
+              <SpecialtiesEditor profileId={profileId} />
+            </div>
+          )}
         </div>
       </main>
       <Footer />
